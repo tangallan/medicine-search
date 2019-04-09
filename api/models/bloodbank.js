@@ -16,14 +16,39 @@ const BloodBankSchema = new Schema({
         type: String,
         required: 'Name is required'
     },
-    group: {
+    address1: {
         type: String,
-        required: 'Group is required'
+        required: 'Address is required'
     },
-    stock: {
-        type: Number,
-        required: 'Stock is required'
-    }
+    address2: {
+        type: String
+    },
+    city: {
+        type: String,
+        required: 'City is required'
+    },
+    postalCode: {
+        type: String,
+        required: 'Postal Code is required'
+    },
+    stateProvince: {
+        type: String,
+        required: 'State is required'
+    },
+    country: {
+        type: String,
+        required: 'Country is required'
+    },
+    inventory: [{
+        group: {
+            type: String,
+            required: 'Group is required'
+        },
+        stock: {
+            type: Number,
+            required: 'Stock is required'
+        }
+    }]
 });
 
 module.exports = mongoose.model('bloodbanks', BloodBankSchema);

@@ -19,7 +19,19 @@ const MedicineSchema = new Schema({
     pdate: {
         type: Date,
         default: Date.now
-    }
+    },
+    medicineShops: [
+        {
+            medicineShopSno: {
+                type: Number,
+                required: 'Medicine Shop Sno is required'
+            },
+            stockQty: {
+                type: Number,
+                required: 'Stocky Qty is required'
+            }
+        }
+    ]
 });
 
 module.exports = mongoose.model('medicines', MedicineSchema);

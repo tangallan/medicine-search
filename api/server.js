@@ -21,15 +21,20 @@ app.use('/api/bloodbanks', require('./routes/bloodbanks/bloodbanks'));
 app.use('/api/medicineShops', require('./routes/medicalshops/medicalshops'));
 app.use('/api/search', require('./routes/search/search'));
 
-app.listen(port, () => {
-    console.log(`Listening on port ${port}`);
-    console.log(monogooseUri);
-    mongoose.connect(monogooseUri, dbOptions, (err) => {
-        if (err) {
-            console.log(err);
-        }
-        console.log(`Server running at http://localhost:${port}/`);
-    });
+
+mongoose.connect(monogooseUri, dbOptions, (err) => {
+    if (err) {
+        console.log(err);
+    }
+    else {
+        app.listen(port, () => {
+            console.log(`Listening on port ${port}`);
+            console.log(monogooseUri);
+            console.log(`Server running at http://localhost:${port}/`);
+        });
+    }
 });
+
+
 
 

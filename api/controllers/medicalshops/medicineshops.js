@@ -33,42 +33,6 @@ const create_medicineShop = (req, res) => {
     });
 };
 
-const addMedicine_ToShop = (req, res) => {
-    const dataToSave = {
-        ...req.body
-    };
-
-    MedicineShopModel.findOne({
-        _id: req.params.id,
-        "medicines.medicineSno": dataToSave.medicineSno
-    }, (err, medicineShop) => {
-        if (err) {
-            res.status(400).json(err);
-        } else {
-            if (medicineShop) {
-                res.status(400).json({
-                    message: 'Medicine Sno already exists for this shop.'
-                });
-            } else {
-                console.log('can added medicine for shop', dataToSave);
-                MedicineShopModel.findByIdAndUpdate(req.params.id, {
-                    $addToSet: {
-                        medicines: req.body
-                    }
-                }, (err, medicineShop) => {
-                    if (err) {
-                        res.status(400).json(err);
-                    } else {
-                        res.json(medicineShop);
-                    }
-                });
-            }
-        }
-    });
-
-
-};
-
 const updateMedicineStock_ForShop = (req, res) => {
     const {
         medicineSno,
@@ -92,29 +56,9 @@ const updateMedicineStock_ForShop = (req, res) => {
     );
 };
 
-const removeMedicine_FromShop = (req, res) => {
-    MedicineShopModel.findByIdAndUpdate(req.params.id, {
-        $pull: {
-            medicines: {
-                medicineSno: req.body.medicineSno
-            }
-        }
-    }, (err, medicineShop) => {
-        if (err) {
-            res.status(400).json(err);
-        } else {
-            res.json(medicineShop);
-        }
-    });
-};
-
-
-
 module.exports = {
     getall_medicineShops: getall_medicineShops,
     get_medicineShop: get_medicineShop,
     create_medicineShop: create_medicineShop,
-    addMedicine_ToShop: addMedicine_ToShop,
-    updateMedicineStock_ForShop: updateMedicineStock_ForShop,
-    removeMedicine_FromShop: removeMedicine_FromShop,
+    updateMedicineStock_ForShop: updateMedicineStock_ForShop
 };

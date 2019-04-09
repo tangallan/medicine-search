@@ -14,16 +14,16 @@ router.
     route('/')
     .post(medicineShopsController.create_medicineShop);
 
-router.
-    route('/:id/addMedicine')
-    .put(medicineShopsController.addMedicine_ToShop);
+// router.
+//     route('/:id/addMedicine')
+//     .put(medicineShopsController.addMedicine_ToShop);
 
-router.
-    route('/:id/removeMedicine')
-    .delete(medicineShopsController.removeMedicine_FromShop);
+// router.
+//     route('/:id/removeMedicine')
+//     .delete(medicineShopsController.removeMedicine_FromShop);
 
-router.
-    route('/:id/updateMedicineStock')
-    .put(medicineShopsController.updateMedicineStock_ForShop);
+// router.
+//     route('/:id/updateMedicineStock')
+//     .put(medicineShopsController.updateMedicineStock_ForShop);
 
 module.exports = router;

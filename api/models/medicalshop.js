@@ -8,6 +8,10 @@ const MedicalShopSchema = new Schema({
         type: String,
         required: 'User is required'
     },
+    sno: {
+        type: Number,
+        required: 'Medicine Shop No. is required'
+    },
     name: {
         type: String,
         required: 'Name is required'
@@ -34,13 +38,7 @@ const MedicalShopSchema = new Schema({
     country: {
         type: String,
         required: 'Country is required'
-    },
-    medicines: [
-        {
-            medicineSno: Number,
-            stockCount: Number
-        }
-    ]
+    }
 });
 
 module.exports = mongoose.model('medicalshops', MedicalShopSchema);

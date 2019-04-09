@@ -33,10 +33,78 @@ const create_medicine = (req, res) => {
     });
 };
 
+const addMedicineShop = (req, res) => {
+    const dataToSave = {
+        ...req.body
+    };
+    console.log(req.params.sno);
+    console.log(dataToSave);
+
+    MedicineModel.findOneAndUpdate({
+        sno: req.params.sno
+    }, {
+        $addToSet: {
+            "medicineShops": dataToSave
+        }
+    }, (err, medicine) => {
+        if(err) {
+            res.status(400).json(err);
+        } else {
+            res.json(medicine);
+        }
+    });
+};
+
+const removeMedicineShop = (req, res) => {
+    const {
+        medicineShopSno
+    } = req.body;
+
+    MedicineModel.findOneAndUpdate({
+        sno: req.params.sno
+    }, {
+        $pull: {
+            medicineShops: {
+                medicineShopSno: medicineShopSno
+            }
+        }
+    }, (err, medicine) => {
+        if(err) {
+            res.status(400).json(err);
+        } else {
+            res.json(medicine);
+        }
+    });
+};
+
+const updateQtyForMedicineShop = (req, res) => {
+    const {
+        medicineShopSno,
+        stockQty
+    } = req.body;
+
+    MedicineModel.findOneAndUpdate({
+        sno: req.params.sno,
+        "medicineShops.medicineShopSno": medicineShopSno
+    }, {
+        $set: {
+            "medicineShops.$.stockQty" : stockQty
+        }
+    }, (err, medicine) => {
+        if(err) {
+            res.status(400).json(err);
+        } else {
+            res.json(medicine);
+        }
+    })
+};
 
 
 module.exports = {
     getall_medicines: getall_medicines,
     get_medicine: get_medicine,
-    create_medicine: create_medicine
+    create_medicine: create_medicine,
+    addMedicineShop: addMedicineShop,
+    removeMedicineShop: removeMedicineShop,
+    updateQtyForMedicineShop: updateQtyForMedicineShop
 };

@@ -21,7 +21,6 @@ app.use('/api/bloodbanks', require('./routes/bloodbanks/bloodbanks'));
 app.use('/api/medicineShops', require('./routes/medicalshops/medicalshops'));
 app.use('/api/search', require('./routes/search/search'));
 
-
 mongoose.connect(monogooseUri, dbOptions, (err) => {
     if (err) {
         console.log(err);

@@ -3,7 +3,7 @@ const express = require('express'),
 const medicineShopsController = require('../../controllers/medicalshops/medicineshops');
 
 router.
-    route('/:id')
+    route('/:sno')
     .get(medicineShopsController.get_medicineShop);
 
 router.
@@ -13,17 +13,5 @@ router.
 router.
     route('/')
     .post(medicineShopsController.create_medicineShop);
-
-// router.
-//     route('/:id/addMedicine')
-//     .put(medicineShopsController.addMedicine_ToShop);
-
-// router.
-//     route('/:id/removeMedicine')
-//     .delete(medicineShopsController.removeMedicine_FromShop);
-
-// router.
-//     route('/:id/updateMedicineStock')
-//     .put(medicineShopsController.updateMedicineStock_ForShop);
 
 module.exports = router;

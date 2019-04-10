@@ -12,11 +12,11 @@ const getall_medicines = (req, res) => {
 };
 
 const get_medicine = (req, res) => {
-    MedicineModel.find({ sno: req.params.id }, (err, meds) => {
+    MedicineModel.findOne({ sno: req.params.id }, (err, meds) => {
         if (err) {
             res.status(400).json(err);
         } else {
-            res.json(meds[0]);
+            res.json(meds);
         }
     });
 }

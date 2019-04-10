@@ -12,7 +12,9 @@ const getall_medicineShops = (req, res) => {
 };
 
 const get_medicineShop = (req, res) => {
-    MedicineShopModel.findById(req.params.id, (err, medicineShop) => {
+    MedicineShopModel.findOne({
+        sno: req.params.sno
+    }, (err, medicineShop) => {
         if (err) {
             res.status(400).json(err);
         } else {
@@ -33,32 +35,8 @@ const create_medicineShop = (req, res) => {
     });
 };
 
-const updateMedicineStock_ForShop = (req, res) => {
-    const {
-        medicineSno,
-        stockCount
-    } = req.body;
-    MedicineShopModel.findOneAndUpdate({
-            _id: req.params.id,
-            "medicines.medicineSno": medicineSno
-        }, {
-            $set: {
-                "medicines.$.stockCount": stockCount
-            }
-        },
-        (err, medicineShop) => {
-            if (err) {
-                res.status(400).json(err);
-            } else {
-                res.json(medicineShop);
-            }
-        }
-    );
-};
-
 module.exports = {
     getall_medicineShops: getall_medicineShops,
     get_medicineShop: get_medicineShop,
-    create_medicineShop: create_medicineShop,
-    updateMedicineStock_ForShop: updateMedicineStock_ForShop
+    create_medicineShop: create_medicineShop
 };

@@ -1,12 +1,22 @@
-import React, { Component } from 'react';
+import React, { Component, Switch } from 'react';
+import { Route, Redirect } from 'react-router-dom';
 import 'antd/dist/antd.css';
 import './App.css';
 
+import Home from './containers/Home/Home';
 import { Layout, Menu, Breadcrumb } from 'antd';
 const { Header, Content, Footer } = Layout;
 
 class App extends Component {
     render() {
+        let routes = (
+            <Switch>
+                {/* <Route path="/medicines" /> */}
+                <Route path="/" exact component={Home} />
+                <Redirect to="/" />
+            </Switch>
+        );
+
         return (
             <Layout className='layout'>
                 <Header>
@@ -23,11 +33,11 @@ class App extends Component {
                     </Menu>
                 </Header>
                 <Content style={{ padding: '0 50px' }}>
-                    <Breadcrumb style={{ margin: '16px 0' }}>
+                    {/* <Breadcrumb style={{ margin: '16px 0' }}>
                         <Breadcrumb.Item>Home</Breadcrumb.Item>
                         <Breadcrumb.Item>List</Breadcrumb.Item>
                         <Breadcrumb.Item>App</Breadcrumb.Item>
-                    </Breadcrumb>
+                    </Breadcrumb> */}
                     <div
                         style={{
                             background: '#fff',
@@ -35,7 +45,7 @@ class App extends Component {
                             minHeight: 1000
                         }}
                     >
-                        Content
+                        <Home />
                     </div>
                 </Content>
                 <Footer style={{ textAlign: 'center' }}>

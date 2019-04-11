@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
 class Home extends Component {
-    constructor() {}
-
     render() {
-        return <div />;
+        return <>
+            <p>Home Page!</p>
+        </>;
     }
 }
 

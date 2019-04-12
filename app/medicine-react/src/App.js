@@ -3,22 +3,29 @@ import { Route, Redirect, Switch, withRouter } from 'react-router-dom';
 import 'antd/dist/antd.css';
 import './App.css';
 
-import Home from './containers/Home/Home';
-import { Layout, Menu, Breadcrumb } from 'antd';
-import Medicines from './containers/Medicines/Medicines';
-import MedicineShops from './containers/MedicineShops/MedicineShops';
-import Bloodbank from './containers/Bloodbanks/Bloodbank';
-const { Header, Content, Footer } = Layout;
+import { Layout } from 'antd';
 
+import { HeaderMenu, SiteRoutes } from './components/HeaderMenu/HeaderMenu';
+
+
+
+const { Header, Content, Footer } = Layout;
 class App extends Component {
     render() {
         let routes = (
             <Switch>
-                <Route path="/medicines" component={Medicines} />
-                <Route path="/medicineshops" componet={MedicineShops} />
-                <Route path="/bloodbanks" component={Bloodbank} />
-                <Route path='/' exact component={Home} />
-                <Redirect to='/' />
+                {SiteRoutes.map(m => {
+                    return (
+                        <Route
+                            name={m.path}
+                            breadcrumbName={m.breadcrumbName}
+                            key={m}
+                            path={`/${m.path}`}
+                            component={m.component}
+                        />
+                    );
+                })}
+                <Redirect to='/home' />
             </Switch>
         );
 
@@ -26,23 +33,9 @@ class App extends Component {
             <Layout className='layout'>
                 <Header>
                     <div className='logo' />
-                    <Menu
-                        theme='dark'
-                        mode='horizontal'
-                        defaultSelectedKeys={['2']}
-                        style={{ lineHeight: '64px' }}
-                    >
-                        <Menu.Item key='1'>nav 1</Menu.Item>
-                        <Menu.Item key='2'>nav 2</Menu.Item>
-                        <Menu.Item key='3'>nav 3</Menu.Item>
-                    </Menu>
+                    <Route path='/' component={HeaderMenu} />
                 </Header>
                 <Content style={{ padding: '0 50px' }}>
-                    {/* <Breadcrumb style={{ margin: '16px 0' }}>
-                        <Breadcrumb.Item>Home</Breadcrumb.Item>
-                        <Breadcrumb.Item>List</Breadcrumb.Item>
-                        <Breadcrumb.Item>App</Breadcrumb.Item>
-                    </Breadcrumb> */}
                     <div
                         style={{
                             background: '#fff',

@@ -1,19 +1,24 @@
-import React, { Component, Switch } from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import React, { Component } from 'react';
+import { Route, Redirect, Switch, withRouter } from 'react-router-dom';
 import 'antd/dist/antd.css';
 import './App.css';
 
 import Home from './containers/Home/Home';
 import { Layout, Menu, Breadcrumb } from 'antd';
+import Medicines from './containers/Medicines/Medicines';
+import MedicineShops from './containers/MedicineShops/MedicineShops';
+import Bloodbank from './containers/Bloodbanks/Bloodbank';
 const { Header, Content, Footer } = Layout;
 
 class App extends Component {
     render() {
         let routes = (
             <Switch>
-                {/* <Route path="/medicines" /> */}
-                <Route path="/" exact component={Home} />
-                <Redirect to="/" />
+                <Route path="/medicines" component={Medicines} />
+                <Route path="/medicineshops" componet={MedicineShops} />
+                <Route path="/bloodbanks" component={Bloodbank} />
+                <Route path='/' exact component={Home} />
+                <Redirect to='/' />
             </Switch>
         );
 
@@ -45,7 +50,7 @@ class App extends Component {
                             minHeight: 1000
                         }}
                     >
-                        <Home />
+                        {routes}
                     </div>
                 </Content>
                 <Footer style={{ textAlign: 'center' }}>
@@ -56,4 +61,4 @@ class App extends Component {
     }
 } // end of Component
 
-export default App;
+export default withRouter(App);
